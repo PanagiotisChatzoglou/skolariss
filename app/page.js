@@ -1,8 +1,12 @@
 import Image from "next/image";
 import "./globals.css";
+import Text from "@/components/Text";
 
 export default function Home() {
   return (
-    <h1 className="text-3xl bg-red-500 font-bold underline">Hello, Next.js!</h1>
+    <h1>
+      Hello, Next.js!
+      <Text />
+    </h1>
   );
 }
