@@ -6,6 +6,7 @@ import { getCourses } from "@/queries/courses";
 export default async function Home() {
   const courses = await getCourses();
   console.log(courses);
+  console.log(courses[0].testimonials);
   return (
     <>
       <h1>
@@ -16,7 +17,10 @@ export default async function Home() {
         {courses.map((course) => (
           <div key={course._id} className="border p-4">
             <h2>{course.title}</h2>
-            {/* <h2>{course.instructor.firstName + }</h2> */}
+            <h2>
+              Teacher: {course.instructor.firstName}{" "}
+              {course.instructor.firstName}
+            </h2>
             <p>{course.subtitle}</p>
             <p>{course.description}</p>
             <p>Category: {course?.category?.title}</p>
