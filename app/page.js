@@ -16,6 +16,7 @@ export default async function Home() {
         {courses.map((course) => (
           <div key={course._id} className="border p-4">
             <h2>{course.title}</h2>
+            {/* <h2>{course.instructor.firstName + }</h2> */}
             <p>{course.subtitle}</p>
             <p>{course.description}</p>
             <p>Category: {course?.category?.title}</p>

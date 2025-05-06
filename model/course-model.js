@@ -35,7 +35,7 @@ const courseSchema = new Schema({
   },
   instructor: {
     type: Schema.ObjectId,
-    required: true,
+    ref: "User",
   },
   testimonials: {
     type: [Schema.ObjectId],
