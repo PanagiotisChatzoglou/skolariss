@@ -5,13 +5,13 @@ import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 
-const CourseCard = (category) => {
+const CourseCard = ({ course }) => {
   return (
-    <Link key={category.id} href={`/courses/${category.id}`}>
+    <Link key={course.id} href={`/courses/${course.id}`}>
       <div className="group hover:shadow-sm transition overflow-hidden border rounded-lg p-3 h-full">
         <div className="relative w-full aspect-video rounded-md overflow-hidden">
           <Image
-            src="/assets/images/courses/course_1.png"
+            src={`/assets/images/courses/${course?.thumbnail}`}
             alt={"course"}
             className="object-cover"
             fill
@@ -19,7 +19,7 @@ const CourseCard = (category) => {
         </div>
         <div className="flex flex-col pt-2">
           <div className="text-lg md:text-base font-medium group-hover:text-sky-700 line-clamp-2">
-            Reactive Accelerator
+            {course?.title}
           </div>
           <p className="text-xs text-muted-foreground">Development</p>
           <div className="my-3 flex items-center gap-x-2 text-sm md:text-xs">
