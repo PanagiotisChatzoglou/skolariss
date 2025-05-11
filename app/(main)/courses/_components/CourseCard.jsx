@@ -21,13 +21,15 @@ const CourseCard = ({ course }) => {
           <div className="text-lg md:text-base font-medium group-hover:text-sky-700 line-clamp-2">
             {course?.title}
           </div>
-          <p className="text-xs text-muted-foreground">Development</p>
+          <p className="text-xs text-muted-foreground">
+            {course?.category?.title}
+          </p>
           <div className="my-3 flex items-center gap-x-2 text-sm md:text-xs">
             <div className="flex items-center gap-x-1 text-slate-500">
               <div>
                 <BookOpen className="w-4" />
               </div>
-              <span>4 Chapters</span>
+              <span>{course?.modules?.length} Chapters</span>
             </div>
           </div>
 
@@ -39,7 +41,7 @@ const CourseCard = ({ course }) => {
 
           <div className="flex items-center justify-between mt-4">
             <p className="text-md md:text-sm font-medium text-slate-700">
-              {formatPrice(49)}
+              {formatPrice(course?.price)}
             </p>
 
             <Button variant="ghost" className="text-xs text-sky-700 h-7 gap-1">
