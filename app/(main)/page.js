@@ -10,6 +10,7 @@ import { ArrowRight } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { getCourseList } from "@/queries/courses";
+import CourseCard from "./courses/_components/CourseCard";
 
 const categories = [
   {
@@ -55,52 +56,9 @@ const categories = [
   },
 ];
 
-const courses = [
-  {
-    id: 1,
-    title: "Design",
-    thumbnail: "/assets/images/categories/design.jpg",
-  },
-
-  {
-    id: 3,
-    title: "Development",
-    thumbnail: "/assets/images/categories/development.jpg",
-  },
-  {
-    id: 4,
-    title: "Marketing",
-    thumbnail: "/assets/images/categories/marketing.jpg",
-  },
-  {
-    id: 5,
-    title: "IT & Software",
-    thumbnail: "/assets/images/categories/it_software.jpg",
-  },
-  {
-    id: 6,
-    title: "Personal Development",
-    thumbnail: "/assets/images/categories/personal_development.jpg",
-  },
-  {
-    id: 7,
-    title: "Business",
-    thumbnail: "/assets/images/categories/business.jpg",
-  },
-  {
-    id: 8,
-    title: "Photography",
-    thumbnail: "/assets/images/categories/photography.jpg",
-  },
-  {
-    id: 9,
-    title: "Music",
-    thumbnail: "/assets/images/categories/music.jpg",
-  },
-];
 const HomePage = async () => {
-  const courseslist = await getCourseList();
-  console.log(courseslist);
+  const courses = await getCourseList();
+  // console.log(courseslist);
 
   return (
     <>
@@ -194,55 +152,8 @@ const HomePage = async () => {
           </Link>
         </div>
         <div className="grid sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-4 gap-4">
-          {courses.map((category) => {
-            return (
-              <Link key={category.id} href={`/courses/${category.id}`}>
-                <div className="group hover:shadow-sm transition overflow-hidden border rounded-lg p-3 h-full">
-                  <div className="relative w-full aspect-video rounded-md overflow-hidden">
-                    <Image
-                      src="/assets/images/courses/course_1.png"
-                      alt={"course"}
-                      className="object-cover"
-                      fill
-                    />
-                  </div>
-                  <div className="flex flex-col pt-2">
-                    <div className="text-lg md:text-base font-medium group-hover:text-sky-700 line-clamp-2">
-                      Reactive Accelerator
-                    </div>
-                    <p className="text-xs text-muted-foreground">Development</p>
-                    <div className="my-3 flex items-center gap-x-2 text-sm md:text-xs">
-                      <div className="flex items-center gap-x-1 text-slate-500">
-                        <div>
-                          <BookOpen className="w-4" />
-                        </div>
-                        <span>4 Chapters</span>
-                      </div>
-                    </div>
-
-                    {/* <CourseProgress
-                      size="sm"
-                      value={80}
-                      variant={110 === 100 ? "success" : ""}
-                    /> */}
-
-                    <div className="flex items-center justify-between mt-4">
-                      <p className="text-md md:text-sm font-medium text-slate-700">
-                        {formatPrice(49)}
-                      </p>
-
-                      <Button
-                        variant="ghost"
-                        className="text-xs text-sky-700 h-7 gap-1"
-                      >
-                        Enroll
-                        <ArrowRight className="w-3" />
-                      </Button>
-                    </div>
-                  </div>
-                </div>
-              </Link>
-            );
+          {courses.map((course) => {
+            return <CourseCard key={course.id} category={course.category} />;
           })}
         </div>
       </section>
