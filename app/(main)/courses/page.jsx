@@ -175,36 +175,7 @@ const CoursesPage = () => {
       </div>
       {/* header ends */}
       {/* active filters */}
-      <div className="flex items-center gap-2 flex-wrap">
-        {/* active categories */}
-        {filter.categories.length > 0 &&
-          filter.categories.map((category) => (
-            <Button
-              key={category}
-              variant="ghost"
-              className="text-xs h-7 bg-muted rounded-full gap-1 text-sky-700"
-              onClick={() =>
-                applyArrayFilter({ type: "categories", value: category })
-              }
-            >
-              {category}
-              <X className="w-3" />
-            </Button>
-          ))}
-        {/* active prices */}
-        {filter.price.length > 0 &&
-          filter.price.map((price) => (
-            <Button
-              key={price}
-              variant="ghost"
-              className="text-xs h-7 bg-muted rounded-full gap-1 text-sky-700"
-              onClick={() => applyArrayFilter({ type: "price", value: price })}
-            >
-              {price}
-              <X className="w-3" />
-            </Button>
-          ))}
-      </div>
+
       <section className="pb-24 pt-6">
         <div className="grid grid-cols-1 gap-x-8 gap-y-10 lg:grid-cols-4">
           {/* Filters */}
