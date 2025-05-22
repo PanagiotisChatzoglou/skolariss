@@ -17,7 +17,7 @@ const SingleCoursePage = async ({ params: { id } }) => {
         thumbnail={course?.thumbnail}
       />
 
-      <CourseDetails />
+      <CourseDetails course={course} />
 
       {/* Testimonials */}
       {course?.testimonials && (
