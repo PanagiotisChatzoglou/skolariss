@@ -2,7 +2,7 @@ import { Geist, Geist_Mono, Inter } from "next/font/google";
 import "./globals.css";
 import { cn } from "@/lib/utils";
 import { Toaster } from "@/components/ui/sonner";
-import { connectDB } from "@/service/mongo";
+import { dbConnect } from "@/service/mongo";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -22,7 +22,7 @@ export const metadata = {
 const poppins = Inter({ subsets: ["latin"], variable: "--font-poppins" });
 
 export default async function RootLayout({ children }) {
-  const conn = await connectDB();
+  const conn = await dbConnect();
   // console.log(conn);
 
   return (
