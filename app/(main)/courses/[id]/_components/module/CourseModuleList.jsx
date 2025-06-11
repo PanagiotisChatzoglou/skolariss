@@ -10,13 +10,13 @@ import { Video } from "lucide-react";
 import { NotepadText } from "lucide-react";
 import { FileQuestion } from "lucide-react";
 import CourseLessonList from "./CourseLessonList";
-const CourseModuleList = () => {
+const CourseModuleList = ({ module }) => {
   return (
     <div>
       {" "}
       <AccordionItem className="border-none" value="item-1">
         {" "}
-        <AccordionTrigger>Introduction</AccordionTrigger>{" "}
+        <AccordionTrigger>{module?.title}</AccordionTrigger>{" "}
         <AccordionContent>
           {" "}
           {/* header */}{" "}
@@ -24,7 +24,8 @@ const CourseModuleList = () => {
             {" "}
             <span className="flex items-center gap-1.5">
               {" "}
-              <Video className="w-4 h-4" /> 12 Lessons{" "}
+              <Video className="w-4 h-4" />{" "}
+              {(module?.duration / 60).toPrecision(2)} Hours{" "}
             </span>{" "}
             <span className="flex items-center gap-1.5">
               {" "}
@@ -42,7 +43,10 @@ const CourseModuleList = () => {
           {/* header ends */}{" "}
           <div className="space-y-3">
             {" "}
-            {/* item */} <CourseLessonList /> {/* item ends */}{" "}
+            {module.lessonIds &&
+              module?.lessonIds.map((lessonId) => (
+                <CourseLessonList key={lessonId} lessonId={lessonId} />
+              ))}
           </div>{" "}
         </AccordionContent>{" "}
       </AccordionItem>{" "}
