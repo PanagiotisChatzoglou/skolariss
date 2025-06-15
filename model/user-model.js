@@ -32,6 +32,7 @@ const userSchema = new Schema({
   bio: {
     type: String,
     required: false,
+    default: "",
   },
   socialMedia: {
     type: Object,
@@ -40,10 +41,12 @@ const userSchema = new Schema({
   profilePicture: {
     type: String,
     required: false,
+    default: "https://i.pravatar.cc",
   },
   designation: {
     type: String,
     required: false,
+    default: "",
   },
 });
 
