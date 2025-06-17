@@ -1,8 +1,31 @@
 import { Button } from "@/components/ui/button";
+import { auth } from "@/auth";
 import { CircleCheck } from "lucide-react";
 import Link from "next/link";
+import { redirect } from "next/navigation";
+import { stripe } from "@/lib/stripe";
+import { getCourseDetails } from "@/queries/courses";
+import { getUserByEmail } from "@/queries/users";
 
-const Success = () => {
+const Success = async ({ searchParams: { session_id, courseId } }) => {
+  if (!session_id) {
+    throw new Error("Please provide a valid session id that start with cs_");
+  }
+
+  const userSession = await auth();
+
+  if (!userSession?.user?.email) {
+    redirect("/login");
+  }
+
+  const course = await getCourseDetails(courseId);
+  const loggedInUser = await getUserByEmail(userSession?.user?.email);
+
+  const checkoutSession = await stripe.checkout.sessions.retrieve(session_id, {
+    expand: ["line_items", "payment_intent"],
+  });
+
+  console.log(checkoutSession);
   return (
     <div className="h-full w-full flex-1 flex flex-col items-center justify-center">
       <div className="flex flex-col items-center gap-6 max-w-[600px] text-center">
@@ -24,3 +47,5 @@ const Success = () => {
 };
 export default Success;
 //enroll-success?session_id=cs_test_a1CYtirab4vOLdtgaycJjL4gBTWQf18UeKCmetEpuxaFzGU1kboao3BBUP&courseId=65656
+
+//http://localhost:3000/enroll-success?session_id=cs_test_a1LO8jmG0DIFPqEMmG7C8rtb5ODvLealJ4BBfjJjN6VWqRjcDKSeu2xdY3&courseId=6648184a6fe803e9128d7fba
