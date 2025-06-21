@@ -2,13 +2,16 @@ import { Button } from "@/components/ui/button";
 import { auth } from "@/auth";
 import { CircleCheck } from "lucide-react";
 import Link from "next/link";
+import React from "react";
 import { redirect } from "next/navigation";
 import { stripe } from "@/lib/stripe";
 import { sendEmails } from "@/lib/emails";
 import { getCourseDetails } from "@/queries/courses";
 import { getUserByEmail } from "@/queries/users";
+import { enrollForCourse } from "@/queries/enrollments";
 
-const Success = async ({ searchParams: { session_id, courseId } }) => {
+const Success = async ({ searchParams }) => {
+  const { session_id, courseId } = await searchParams;
   if (!session_id) {
     throw new Error("Please provide a valid session id that start with cs_");
   }
@@ -34,15 +37,20 @@ const Success = async ({ searchParams: { session_id, courseId } }) => {
   const customerName = `${loggedInUser?.firstName} ${loggedInUser?.lastName}`;
   const customerEmail = loggedInUser?.email;
   const productName = course?.title;
-  //console.log(customerName,customerEmail,productName);
+  console.log(customerName, customerEmail, productName);
 
   if (paymentStatus === "succeeded") {
     /// Update data to enrollment table
+    const enrolled = await enrollForCourse(
+      course?.id,
+      loggedInUser?.id,
+      "stripe"
+    );
+    console.log(enrolled);
     // Send emails to the instructor and student who paid
     const instructorName = `${course?.instructor?.firstName} ${course?.instructor?.lastName}`;
     const instructorEmail = course?.instructor?.email;
-    //console.log(instructorName,instructorEmail);Add commentMore actions
-
+    console.log(instructorName, instructorEmail);
     const emailsToSend = [
       {
         to: instructorEmail,
@@ -57,7 +65,7 @@ const Success = async ({ searchParams: { session_id, courseId } }) => {
     ];
 
     const emailSendResponse = await sendEmails(emailsToSend);
-    // console.log(emailSendResponse);
+    console.log(emailSendResponse);
   }
   return (
     <div className="h-full w-full flex-1 flex flex-col items-center justify-center">
