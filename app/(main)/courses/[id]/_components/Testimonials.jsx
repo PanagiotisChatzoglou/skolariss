@@ -11,6 +11,7 @@ import StarRating from "@/components/star-rating";
 
 const Testimonials = ({ testimonials }) => {
   return (
+    // This component displays testimonials in a carousel format.
     <section className="pb-8 md:pb-12 lg:pb-24">
       <div className="container">
         <SectionTitle className="mb-6">Testimonials</SectionTitle>
