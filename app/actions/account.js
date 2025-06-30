@@ -11,3 +11,5 @@ export async function updateUserInfo(email, updatedData) {
     throw new Error(error);
   }
 }
+
+export async function changePassword(email, oldPassword, newPassword) {}
