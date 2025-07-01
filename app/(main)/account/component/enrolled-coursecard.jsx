@@ -26,12 +26,13 @@ const EnrolledCourseCard = async ({ enrollment }) => {
         <div className="text-lg md:text-base font-medium group-hover:text-sky-700 line-clamp-2">
           {enrollment?.course?.title}
         </div>{" "}
-        <span className="text-xs text-muted-foreground">Development</span>{" "}
+        <span className="text-xs text-muted-foreground">
+          {courseCategory?.title}
+        </span>
         <div className="my-3 flex items-center gap-x-2 text-sm md:text-xs">
           {" "}
           <div className="flex items-center gap-x-1 text-slate-500">
-            {" "}
-            <BookOpen className="w-4" /> <span>4 Chapters</span>{" "}
+            <span>{enrollment?.course?.modules?.length} Chapters</span>
           </div>{" "}
         </div>{" "}
         <div className="border-b pb-2 mb-2">
@@ -40,7 +41,7 @@ const EnrolledCourseCard = async ({ enrollment }) => {
             {" "}
             <span className="text-md md:text-sm font-medium text-slate-700">
               {" "}
-              Total Modules: 10{" "}
+              Total Modules:{enrollment?.course?.modules?.length}
             </span>{" "}
             <div className="text-md md:text-sm font-medium text-slate-700">
               {" "}
